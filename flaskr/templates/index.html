@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Status{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    Current number of people in the gym: <b class="emphasize number">{{ number }}</b>
+{% endblock %}
