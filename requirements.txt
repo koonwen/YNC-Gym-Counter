@@ -17,7 +17,3 @@ python-dotenv==0.17.1
 toml==0.10.2
 watchdog==2.1.2
 Werkzeug==2.0.1
-# Python packages required for classify_picamera.py
-numpy
-picamera
-Pillow
