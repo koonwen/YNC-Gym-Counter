@@ -13,6 +13,6 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 @login_required
 def index():
     db = get_db()
-    row = db.execute('SELECT * FROM data;').fetchone()
-    number = row['average']
-    return render_template('index.html', number=number)
+    latest = db.execute('SELECT * FROM data LIMIT 1;').fetchone()
+    average = latest['average']
+    return render_template('index.html', number=average)
