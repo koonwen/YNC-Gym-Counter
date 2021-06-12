@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Admin{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <input type="button" value="Refresh">
+    <table class="data-table">
+        <tr>
+            <th>
+                Timestamp
+            </th>
+            <th>
+                Image 1
+            </th>
+            <th>
+                Image 2
+            </th>
+            <th>
+                Image 3
+            </th>
+            <th>
+                Image 4
+            </th>
+            <th>
+                Image 5
+            </th>
+            <th>
+                Average
+            </th>
+        </tr>
+        {% for row in table %}
+            <tr>
+                {% for data in row %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
