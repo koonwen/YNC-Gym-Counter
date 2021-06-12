@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
 </head>
 <header class="flex-container">
     <h1>YNC GYM</h1>
 </header>
-<nav>
-    <ul>
-        {% if g.user %}
-            <li><span>Logged in as: <b class="emphasize">{{ g.user['username'] }}</b></span>
-            <li><a href="{{ url_for('auth.logout') }}">Logout</a>
-                {% else %}
-            <li><a href="{{ url_for('auth.register') }}">Register</a>
-            <li><a href="{{ url_for('auth.login') }}">Log In</a>
-        {% endif %}
-    </ul>
-</nav>
+{% if g.user %}
+    <nav>
+        <ul>
+                <li><span>Logged in as: <b class="emphasize">{{ g.user['username'] }}</b></span>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a>
+        </ul>
+    </nav>
+{% endif %}
 <section class="content">
     <header>
         {% block header %}{% endblock %}
