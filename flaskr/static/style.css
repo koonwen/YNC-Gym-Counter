@@ -114,3 +114,20 @@ input[type=submit] {
     display: flex;
     justify-content: space-between;
 }
+
+h4 {
+    margin: 0;
+    padding: 0
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    padding:10px;
+}
