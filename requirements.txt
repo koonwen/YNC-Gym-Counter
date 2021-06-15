@@ -2,7 +2,8 @@ attrs==21.2.0
 click==8.0.1
 coverage==5.5
 Flask==2.0.1
--e git+https://github.com/koonwen/YNC-Gym-Counter.git@df13aaa53b2c0a22a2abc05aedc87994fd6e9380#egg=flaskr
+-e git+https://github.com/koonwen/YNC-Gym-Counter.git@3974fc48fcf9b7d2102162c02c10ba1a82b66ac6#egg=flaskr
+gunicorn==20.1.0
 iniconfig==1.1.1
 itsdangerous==2.0.1
 Jinja2==3.0.1

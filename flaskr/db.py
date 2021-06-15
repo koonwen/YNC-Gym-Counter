@@ -30,10 +30,10 @@ def init_db():
         db.executescript(f.read().decode('utf8'))
 
 
-def recreate_data_table():
+def reset_data_table():
     db = get_db()
 
-    with current_app.open_resource('recreate.sql') as f:
+    with current_app.open_resource('reset.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
@@ -45,15 +45,15 @@ def init_db_command():
     click.echo('Initialized the database')
 
 
-@click.command('recreate-data-table')
+@click.command('reset-data-table')
 @with_appcontext
-def recreate_data_table_command():
-    """Recreates the data table and stores past data in a CSV"""
-    recreate_data_table()
-    click.echo('Recreated data table')
+def reset_data_table_command():
+    """Resets the data table and stores past data in a CSV"""
+    reset_data_table()
+    click.echo('Reset data table')
 
 
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
-    app.cli.add_command(recreate_data_table_command)
+    app.cli.add_command(reset_data_table_command)
