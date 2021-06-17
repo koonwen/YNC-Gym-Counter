@@ -7,9 +7,7 @@ def create_app(test_config=None):
     app = Flask(import_name='app', instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        # DATABASE=os.path.join(app.instance_path, 'app.sqlite'),
-        SQLALCHEMY_DATABASE_URI=os.path.join(app.instance_path, 'app.sqlite'),
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        DATABASE=os.path.join(app.instance_path, 'app.sqlite'),
     )
 
     if test_config is None:
@@ -25,7 +23,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from app.models import db
+    from . import db
     db.init_app(app)
 
     from app import user, auth, admin

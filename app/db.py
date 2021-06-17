@@ -33,6 +33,7 @@ def init_db():
 def reset_data_table():
     db = get_db()
 
+    db.create_all()
     with current_app.open_resource('reset.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
