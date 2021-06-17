@@ -4,10 +4,12 @@ from flask import Flask
 
 def create_app(test_config=None):
     # Create and configure app
-    app = Flask('flaskr', instance_relative_config=True)
+    app = Flask(import_name='app', instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        # DATABASE=os.path.join(app.instance_path, 'app.sqlite'),
+        SQLALCHEMY_DATABASE_URI=os.path.join(app.instance_path, 'app.sqlite'),
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
     if test_config is None:
@@ -23,16 +25,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db
+    from app.models import db
     db.init_app(app)
 
-    from . import user
+    from app import user, auth, admin
     app.register_blueprint(user.bp)
-
-    from . import auth
     app.register_blueprint(auth.bp)
-
-    from . import admin
     app.register_blueprint(admin.bp)
 
     return app

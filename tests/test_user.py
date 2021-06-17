@@ -1,4 +1,4 @@
-from flaskr.db import get_db
+from app.db import get_db
 
 
 def test_index(app, client, auth):
