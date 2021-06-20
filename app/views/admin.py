@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
-from app.auth import login_required
-from app.db import get_db
+from app.views.auth import login_required
+from app.db.db import get_db
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 

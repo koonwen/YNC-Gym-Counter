@@ -1,7 +1,7 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, render_template
 )
-from app.db import get_db
+from app.db.db import get_db
 
 bp = Blueprint('user', __name__)
 

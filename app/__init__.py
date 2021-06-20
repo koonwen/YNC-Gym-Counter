@@ -23,10 +23,14 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db
+    # Extensions
+    from app.db import db
     db.init_app(app)
 
-    from app import user, auth, admin
+    # Blueprints
+    from app.views import user
+    from app.views import auth
+    from app.views import admin
     app.register_blueprint(user.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(admin.bp)
