@@ -9,7 +9,8 @@ bp = Blueprint('admin', __name__, url_prefix='/admin')
 @login_required
 def index():
     db = get_db()
-    table = db.execute('SELECT * FROM data LIMIT 10').fetchall()
+    table = db.execute('SELECT * FROM data '
+                       'ORDER BY timestamp DESC LIMIT 10').fetchall()
     return render_template('admin.html', table=table)
 
 
