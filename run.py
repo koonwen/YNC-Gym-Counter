@@ -1,6 +1,10 @@
-from app import create_app
+import app
 
-app = create_app()
+app = app.create_app({
+    "ENV": 'development',
+    "DEBUG": True,
+    "TESTING": True
+})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
