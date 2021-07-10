@@ -3,6 +3,7 @@ The server code for the yncgym.ml website
 
 ## Contents
 - Building the project
+- Repository Structure
 
 ## Building the project
 If you run macOS or Linux, you may generally follow the instructions and commands exactly. If you use Windows, I provide links that you can reference. These instructions use the command line to build the project, if you are unfamiliar with it, open up your file manager which is "Finder" for Mac and go to your "home" directory (This should be the folder with your name). As you type in the commands, you will be able to see what is happening.
@@ -22,3 +23,54 @@ If you run macOS or Linux, you may generally follow the instructions and command
 ```
 6. Exit the program with CTRL+C and make a new branch for the project. In the terminal once again, type `git branch <name of branch>` (<name of branch> should be replaced with the following syntax "name-branchfeature". E.g. git branch koonwen-frontend).
 7. Switch onto branch, `git checkout <name of branch`. 
+                                           
+
+## Application Structure        
+```
+.
+├── app
+│   ├── db
+│   │   ├── db.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── reset.sql
+│   │   └── schema.sql
+│   ├── __init__.py
+│   ├── static
+│   │   └── style.css
+│   ├── templates
+│   │   ├── admin.html
+│   │   ├── auth
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   ├── base.html
+│   │   └── index.html
+│   └── views
+│       ├── admin.py
+│       ├── auth.py
+│       ├── __init__.py
+│       └── user.py
+├── instance
+│   └── sqlite.db
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── run.py
+└── tests
+    ├── conftest.py
+    ├── data.sql
+    ├── test_auth.py
+    ├── test_db.py
+    ├── test_factory.py
+    └── test_user.py
+```
+- **README.md**: A file for understanding the project. Actually what you are reading right now.
+- **LICENSE**: The policy for using this repository
+- **requirements.txt**: text file to instruct python what packages to download
+- **run.py**: pyfile Interface to start the flask application
+- **instance**: Directory to keep sqlite database files and other instance data
+- **tests**: Directory for for tests
+- **app**: directory holds all the code related to the website
+                                           
+The application structure is adapted from the flask documentation. To get a clearer understanding of all the moving parts, refer to:
+https://flask.palletsprojects.com/en/2.0.x/tutorial/
