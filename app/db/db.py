@@ -26,15 +26,14 @@ def close_db(e=None):
 def init_db():
     db = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
+    with current_app.open_resource('db/schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
 def reset_data_table():
     db = get_db()
 
-    db.create_all()
-    with current_app.open_resource('reset.sql') as f:
+    with current_app.open_resource('db/reset.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
@@ -51,7 +50,7 @@ def init_db_command():
 def reset_data_table_command():
     """Resets the data table and stores past data in a CSV"""
     reset_data_table()
-    click.echo('Reset data table')
+    click.echo('Data table has been reset')
 
 
 def init_app(app):
