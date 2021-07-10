@@ -13,8 +13,8 @@ def index():
     latest = db.execute('SELECT timestamp, average FROM data '
                         'ORDER BY timestamp DESC LIMIT 1;').fetchone()
     if latest is None:
-        average = "ERROR"
-        timestamp = "ERROR"
+        average = "No Data Yet"
+        timestamp = "None"
     else:
         average = latest['average']
         timestamp = latest['timestamp']
