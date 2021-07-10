@@ -66,11 +66,11 @@ If you run macOS or Linux, you may generally follow the instructions and command
 ```
 - **README.md**: A file for understanding the project. Actually what you are reading right now.
 - **LICENSE**: The policy for using this repository
-- **requirements.txt**: text file to instruct python what packages to download
-- **run.py**: pyfile Interface to start the flask application
+- **requirements.txt**: Text file to instruct python what packages to download
+- **run.py**: Pyfile which acts as an interface to start the flask application
 - **instance**: Directory to keep sqlite database files and other instance data
 - **tests**: Directory for for tests
-- **app**: directory holds all the code related to the website
+- **app**: Directory holds all the code related to the website
                                            
 The application structure is adapted from the flask documentation. To get a clearer understanding of all the moving parts, refer to:
 https://flask.palletsprojects.com/en/2.0.x/tutorial/
