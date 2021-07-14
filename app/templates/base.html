@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
-</head>
 <header class="flex-container">
-    <h1>YNC GYM</h1>
+    <a href="{{ url_for('user.index') }}"><h1>YNC GYM</h1></a>
 </header>
 {% if g.user %}
     <nav>

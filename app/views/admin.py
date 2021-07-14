@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request
 from app.views.auth import login_required
-from app.db.db import get_db
-
+from app.db.utils import get_db
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 
@@ -13,25 +12,10 @@ def index():
                        'ORDER BY timestamp DESC LIMIT 10').fetchall()
     return render_template('admin.html', table=table)
 
-
-@bp.route('/addtime', methods=['POST'])
-@login_required
-def add_data():
-    data = request.get_json()
-    timestamp = data["timestamp"]
-    img1, img2, img3, img4, img5 = data["img1"], data["img2"], data["img3"], data["img4"], data['img5']
-    average = (img1 + img2 + img3 + img4 + img5) // 5
-
-    db = get_db()
-    db.execute('INSERT INTO data (timestamp, img1, img2, img3, img4, img5, average) '
-               'VALUES (?,?,?,?,?,?,?)',
-               (timestamp, img1, img2, img3, img4, img5, average))
-    db.commit()
-    return "Success"
-
-
+# TODO Add some validation
 @bp.route('/pi', methods=['POST'])
 def receive_data():
+    """Endpoint to receive data from the Raspberry pi"""
     data = request.get_json()
     db = get_db()
     db.execute('INSERT INTO data (timestamp, img1, img2, img3, img4, img5, average)'
