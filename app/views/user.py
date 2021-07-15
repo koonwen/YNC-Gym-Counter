@@ -1,21 +1,14 @@
-from flask import (
-    Blueprint, render_template
-)
-from app.db.db import get_db
-
+from flask import Blueprint, render_template
+from app.db.models import Data
 bp = Blueprint('user', __name__)
-
 
 @bp.route('/')
 def index():
-    db = get_db()
-
-    latest = db.execute('SELECT timestamp, average FROM data '
-                        'ORDER BY timestamp DESC LIMIT 1;').fetchone()
-    if latest is None:
-        average = "No Data Yet"
-        timestamp = "None"
+    latest = Data.query.order_by(Data.timestamp).first()
+    if not latest:
+        average="No data yet"
+        timestamp="Nil"
     else:
-        average = latest['average']
-        timestamp = latest['timestamp']
+        average = latest.mode
+        timestamp = latest.timestamp
     return render_template('index.html', number=average, timestamp=timestamp)

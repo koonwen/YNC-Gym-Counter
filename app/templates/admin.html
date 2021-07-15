@@ -27,14 +27,18 @@
                 Image 5
             </th>
             <th>
-                Average
+                Mode
             </th>
         </tr>
         {% for row in table %}
             <tr>
-                {% for data in row %}
-                    <td>{{ data }}</td>
-                {% endfor %}
+                <td>{{ row.timestamp }}</td>
+                <td>{{ row.img1 }}</td>
+                <td>{{ row.img2 }}</td>
+                <td>{{ row.img3 }}</td>
+                <td>{{ row.img4 }}</td>
+                <td>{{ row.img5 }}</td>
+                <td>{{ row.mode }}</td>
             </tr>
         {% endfor %}
     </table>
