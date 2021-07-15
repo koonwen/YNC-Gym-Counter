@@ -1,8 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 import random
-from flask import current_app
 
 db = SQLAlchemy()
 
@@ -27,6 +26,7 @@ class Admin(db.Model):
         db.session.add(Admin(username=username, password=password))
         db.session.commit()
 
+
 class Data(db.Model):
     timestamp = db.Column(db.DATETIME, primary_key=True, default=datetime.utcnow)
     img1 = db.Column(db.Integer, nullable=False)
@@ -42,13 +42,13 @@ class Data(db.Model):
     @staticmethod
     def mock_data(rows=1):
         for i in range(rows):
-            l = [random.randint(0,10) for j in range(5)]
-            l.sort()
+            lst = [random.randint(0, 10) for j in range(5)]
+            lst.sort()
             db.session.add(Data(timestamp=datetime.now(),
-                                img1=l[0],
-                                img2=l[1],
-                                img3=l[2],
-                                img4=l[3],
-                                img5=l[4],
-                                mode=l[2]))
+                                img1=lst[0],
+                                img2=lst[1],
+                                img3=lst[2],
+                                img4=lst[3],
+                                img5=lst[4],
+                                mode=lst[2]))
         return db.session.commit()
