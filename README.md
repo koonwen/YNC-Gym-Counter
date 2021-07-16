@@ -22,7 +22,7 @@ If you run macOS or Linux, you may generally follow the instructions and command
  * Debugger PIN: 266-406-274
 ```
 6. Exit the program with CTRL+C and make a new branch for the project. In the terminal once again, type `git branch <name of branch>` (<name of branch> should be replaced with the following syntax "name-branchfeature". E.g. git branch koonwen-frontend).
-7. Switch onto branch, `git checkout <name of branch`. 
+7. Switch onto branch, `git checkout <name of branch>`. 
                                            
 
 ## Application Structure        

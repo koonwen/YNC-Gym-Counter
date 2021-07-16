@@ -1,6 +1,8 @@
 import sqlite3
 
 import click
+from random import randint
+from datetime import datetime
 from flask import current_app, g
 from flask.cli import with_appcontext
 
@@ -36,6 +38,22 @@ def reset_data_table():
     with current_app.open_resource('db/reset.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+def mock_data(n=1):
+    db = get_db()
+
+    for i in range(n):
+        db.execute('INSERT INTO data '
+                   '(timestamp, img1, img2, img3, img4, img5, average)'
+                   'VALUES (?, ?, ?, ?, ?, ?, ?)',
+                   (datetime.now().isoformat(),
+                    randint(0, 10),
+                    randint(0, 10),
+                    randint(0, 10),
+                    randint(0, 10),
+                    randint(0, 10),
+                    randint(0, 10))
+                    )
+    db.commit()
 
 @click.command('init-db')
 @with_appcontext
