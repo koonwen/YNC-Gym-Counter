@@ -6,10 +6,9 @@ from flask import Flask
 def create_app(test_config=None):
     # Create and configure app
     app = Flask(import_name='app', instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'sqlite.db'),
-    )
+    app.config['SECRET_KEY']='dev',
+    app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../instance/site.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -25,8 +24,9 @@ def create_app(test_config=None):
         pass
 
     # Extensions
-    from app.db import db
+    from app.db import db, add_db_utils
     db.init_app(app)
+    add_db_utils(app)
 
     # Blueprints
     from app.views import user
