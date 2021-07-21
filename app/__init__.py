@@ -1,5 +1,5 @@
 import os
-import dotenv
+from dotenv import load_dotenv
 from flask import Flask
 
 
@@ -12,7 +12,7 @@ def create_app(test_config=None):
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        dotenv.load_dotenv(verbose=True)
+        load_dotenv(verbose=True)
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
