@@ -1,6 +1,11 @@
 import constants as keys # can move the api_key to .env file alternatively
 from telegram.ext import * # install python-telegram-bot using pip3 first
 import responses as R
+import dotenv
+import os
+
+dotenv.load_dotenv(verbose=True)
+key = os.environ['API_KEY']
 
 print("Bot started...")
 
@@ -20,7 +25,7 @@ def error(update, context):
     print(f"Update {update} caused errr {context.error}")
 
 def main(): 
-    updater = Updater(keys.API_KEY, use_context=True)
+    updater = Updater(key, use_context=True)
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("start", start_command))
