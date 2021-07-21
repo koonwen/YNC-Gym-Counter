@@ -10,5 +10,5 @@ def index():
         timestamp="Nil"
     else:
         average = latest.mode
-        timestamp = latest.timestamp
+        timestamp = latest.timestamp.isoformat(sep=' ', timespec='seconds')
     return render_template('index.html', number=average, timestamp=timestamp)
