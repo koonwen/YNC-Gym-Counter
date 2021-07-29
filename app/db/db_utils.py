@@ -2,21 +2,23 @@ import click
 from app.db.models import db, Data
 from flask.cli import with_appcontext
 
-def close_db():
-    db.close()
 
 def init_db():
     db.drop_all()
     db.create_all()
 
+
 def reset_data_table():
     db.session.query(Data).delete()
     db.session.commit()
+
 
 def mock_db():
     db.drop_all()
     db.create_all()
     Data.mock_data(10)
+    db.session.commit()
+
 
 # ================================= CLI ==================================
 @click.command('init-db')
@@ -34,6 +36,7 @@ def reset_data_table_command():
     reset_data_table()
     click.echo('Data table reset')
 
+
 @click.command('mock-db')
 @with_appcontext
 def mock_db_command():
@@ -46,4 +49,3 @@ def add_db_utils(app):
     app.cli.add_command(init_db_command)
     app.cli.add_command(reset_data_table_command)
     app.cli.add_command(mock_db_command)
-    app.do_teardown_appcontext(close_db)

@@ -1,7 +1,5 @@
 import functools
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import db, Admin
 
@@ -23,8 +21,8 @@ def register():
             error = f"User {username} is already registered."
 
         if error is None:
-            a = Admin(username=username, password=generate_password_hash(password))
-            db.session.add(a)
+            new_admin = Admin(username=username, password=generate_password_hash(password))
+            db.session.add(new_admin)
             db.session.commit()
             return redirect(url_for('auth.login'))
 

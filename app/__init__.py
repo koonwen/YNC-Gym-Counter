@@ -29,9 +29,7 @@ def create_app(test_config=None):
     add_db_utils(app)
 
     # Blueprints
-    from app.views import user
-    from app.views import auth
-    from app.views import admin
+    from app.views import user, auth, admin
     app.register_blueprint(user.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(admin.bp)
