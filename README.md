@@ -30,11 +30,9 @@ If you run macOS or Linux, you may generally follow the instructions and command
 .
 ├── app
 │   ├── db
-│   │   ├── db.py
+│   │   ├── db_utils.py
 │   │   ├── __init__.py
-│   │   ├── models.py
-│   │   ├── reset.sql
-│   │   └── schema.sql
+│   │   └── models.py
 │   ├── __init__.py
 │   ├── static
 │   │   └── style.css
@@ -50,27 +48,34 @@ If you run macOS or Linux, you may generally follow the instructions and command
 │       ├── auth.py
 │       ├── __init__.py
 │       └── user.py
-├── instance
-│   └── sqlite.db
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── run.py
+├── setup.cfg
+├── setup.py
 └── tests
     ├── conftest.py
-    ├── data.sql
-    ├── test_auth.py
-    ├── test_db.py
+    ├── db
+    │   ├── test_db_utils.py
+    │   └── test_models.py
+    ├── mockdata.py
     ├── test_factory.py
-    └── test_user.py
+    └── views
+        ├── test_admin.py
+        ├── test_auth.py
+        └── test_user.py
 ```
-- **README.md**: A file for understanding the project. Actually what you are reading right now.
-- **LICENSE**: The policy for using this repository
+- **app**: Directory holds all the code related to the website.
+- **LICENSE**: The policy for using this repository.
+- **README.md**: Information about the project. Actually what you are reading right now.
 - **requirements.txt**: Text file to instruct python what packages to download
-- **run.py**: Pyfile which acts as an interface to start the flask application
-- **instance**: Directory to keep sqlite database files and other instance data
-- **tests**: Directory for for tests
-- **app**: Directory holds all the code related to the website
-                                           
-The application structure is adapted from the flask documentation. To get a clearer understanding of all the moving parts, refer to:
+- **run.py**: Pyfile which acts as an interface to start the flask application.
+- **setup.py**: Pyfile for package distribution.
+- **setup.cfg**: Configuration files for `pytest` and `coverage` commandline tools  .
+- **tests**: Directory for for tests.
+- **instance**: Directory to keep sqlite database files and other instance data (Not shown in the repository but will get created when you first initialize the database)
+The application structure is adapted from the flask documentation.
+  
+To get a clearer understanding of all the moving parts, refer to:
 https://flask.palletsprojects.com/en/2.0.x/tutorial/
