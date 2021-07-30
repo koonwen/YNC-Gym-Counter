@@ -30,7 +30,7 @@ To contribute, please adhere to the following procedure.
 - Make a new branch for the project. In the terminal, type `git branch <name of branch>` ("name of branch" should be replaced with the following syntax "name-branchfeature". E.g. git branch koonwen-frontend)
 - Switch onto your branch with, `git checkout <name of branch>`
 - Start developing!
-- Once you are happy with your contributions, push your branch to the remote server under your branch name. Then open a pull request which will allow me to review your code before merging the the master branch
+- Once you are happy with your contributions, push your branch to the remote server under your branch name with `git push origin HEAD`. Then open a pull request on github which will allow me to review your code before merging the the master branch
 
 For all other questions and queries, please email: koonwen@gmail.com
 
