@@ -4,7 +4,14 @@ import tempfile
 import pytest
 from app import create_app
 from app.db import init_db
-from mockdata import load_mock_data
+from mock_data import load_mock_data
+from werkzeug.security import generate_password_hash
+
+
+@pytest.fixture(autouse=True)
+def mock_env(monkeypatch):
+    monkeypatch.setenv('PI_USERNAME', 'test_user')
+    monkeypatch.setenv('PI_PASSWORD', generate_password_hash('test_pw'))
 
 
 @pytest.fixture
