@@ -4,7 +4,7 @@ bp = Blueprint('user', __name__)
 
 @bp.route('/')
 def index():
-    latest = Data.query.order_by(Data.timestamp).first()
+    latest = Data.get_latest_entry()
     if not latest:
         average="No data yet"
         timestamp="Nil"

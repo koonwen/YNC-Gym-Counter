@@ -1,30 +1,17 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from app.views.auth import login_required
-from app.db import db, Data
-from datetime import datetime
+from app.db import Data, Admin
+
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
-
+# TODO Fix display
+# TODO Select number of rows & see if you can simply query
 @bp.route('/')
 @login_required
 def index():
-    table = Data.query.order_by(Data.timestamp.desc()).limit(10)
-    return render_template('admin.html', table=table)
-
-# TODO Add some validation
-# TODO Change average to mode on raspberry pi end
-@bp.route('/pi', methods=['POST'])
-def receive_data():
-    """Endpoint to receive data from Pi"""
-    data = request.get_json()
-    datetime_obj = datetime.fromisoformat(data['timestamp'])
-    d = Data(timestamp=datetime_obj,
-         img1=data['img1'],
-         img2=data['img2'],
-         img3=data['img3'],
-         img4=data['img4'],
-         img5=data['img5'],
-         mode=data['mode'])
-    db.session.add(d)
-    db.session.commit()
-    return "Success"
+    """Admin index page showing data table"""
+    latest_n_entries = Data.get_latest_n_entries()
+    admin_usernames = Admin.get_all_admin_usernames()
+    return render_template('admin.html',
+                           entries=latest_n_entries,
+                           admin_usernames=admin_usernames)
