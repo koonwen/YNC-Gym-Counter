@@ -4,7 +4,7 @@ import tempfile
 import pytest
 from app import create_app
 from app.db import init_db
-from mock_data import load_mock_data
+from mockdata import load_mock_data
 from werkzeug.security import generate_password_hash
 
 
