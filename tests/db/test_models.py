@@ -2,17 +2,18 @@ from app.db import Data, Admin
 from datetime import datetime
 import pytest
 
-
+#TODO Change these to suites
 def test_Admin_class(app):
     with app.test_request_context():
-        assert Admin.verify('test', 'test') == 1
-        assert Admin.verify('a', 'a') is None
-        assert Admin.verify('test', 'wrong') == "Incorrect password"
+        assert Admin.verify_admin('test', 'test') == 1
+        assert Admin.verify_admin('a', 'a') is None
+        assert Admin.verify_admin('test', 'wrong') == "Incorrect password"
 
         test_Admin = Admin.add_admin('a', 'a')
         assert repr(test_Admin) == f'Admin(username="a", ' \
                                    f'password="{test_Admin.password}")'
         assert str(test_Admin) == '<Admin: a>'
+        assert Admin.get_all_admin_usernames() == ['test', 'a']
 
 
 def test_Data_class(app):
@@ -25,5 +26,4 @@ def test_Data_class(app):
         assert repr(test_Data) == f'Data(timestamp={timestamp}, img1=1, img2=1, img3=3, img4=2, img5=5, mode=3)'
         assert str(test_Data) == f'<Data:{timestamp}, {test_Data.mode}>'
 
-        assert str(Data.get_latest()) == f'<Data:{timestamp}, {test_Data.mode}>'
-        assert Data.get_latest_mode() == test_Data.mode
+        assert str(Data.get_latest_entry()) == f'<Data:{timestamp}, {test_Data.mode}>'
