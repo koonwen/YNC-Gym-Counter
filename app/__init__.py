@@ -9,6 +9,7 @@ def create_app(test_config=None):
     app.config['SECRET_KEY']='dev',
     app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../instance/site.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+    app.permanent_session_lifetime = False
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -29,9 +30,10 @@ def create_app(test_config=None):
     add_db_utils(app)
 
     # Blueprints
-    from app.views import user, auth, admin
+    from app.views import user, auth, admin, pi
     app.register_blueprint(user.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(admin.bp)
+    app.register_blueprint(pi.bp)
 
     return app
