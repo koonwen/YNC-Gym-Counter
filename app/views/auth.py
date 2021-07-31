@@ -5,30 +5,29 @@ from app.db import db, Admin
 
 bp = Blueprint('auth', __name__)
 
-# TODO Do some validation to my email to approve.
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif Admin.query.filter_by(username=username).first():
-            error = f"User {username} is already registered."
-
-        if error is None:
-            new_admin = Admin(username=username, password=generate_password_hash(password))
-            db.session.add(new_admin)
-            db.session.commit()
-            return redirect(url_for('auth.login'))
-
-        flash(error)
-
-    return render_template('auth/register.html')
+# @bp.route('/register', methods=('GET', 'POST'))
+# def register():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+#         error = None
+#
+#         if not username:
+#             error = 'Username is required.'
+#         elif not password:
+#             error = 'Password is required.'
+#         elif Admin.query.filter_by(username=username).first():
+#             error = f"User {username} is already registered."
+#
+#         if error is None:
+#             new_admin = Admin(username=username, password=generate_password_hash(password))
+#             db.session.add(new_admin)
+#             db.session.commit()
+#             return redirect(url_for('auth.login'))
+#
+#         flash(error)
+#
+#     return render_template('auth/register.html')
 
 
 @bp.route('/login', methods=('GET', 'POST'))
@@ -79,4 +78,3 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
-
