@@ -1,45 +1,43 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Admin{% endblock %}</h1>
+<h1>{% block title %}Admin{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
+<div>
     <input type="button" value="Refresh">
     <table class="data-table">
         <tr>
-            <th>
-                Timestamp
-            </th>
-            <th>
-                Image 1
-            </th>
-            <th>
-                Image 2
-            </th>
-            <th>
-                Image 3
-            </th>
-            <th>
-                Image 4
-            </th>
-            <th>
-                Image 5
-            </th>
-            <th>
-                Mode
-            </th>
+            <th>Timestamp</th>
+            <th>Image 1</th>
+            <th>Image 2</th>
+            <th>Image 3</th>
+            <th>Image 4</th>
+            <th>Image 5</th>
+            <th>Mode</th>
         </tr>
-        {% for row in table %}
-            <tr>
-                <td>{{ row.timestamp }}</td>
-                <td>{{ row.img1 }}</td>
-                <td>{{ row.img2 }}</td>
-                <td>{{ row.img3 }}</td>
-                <td>{{ row.img4 }}</td>
-                <td>{{ row.img5 }}</td>
-                <td>{{ row.mode }}</td>
-            </tr>
+        {% for row in entries %}
+        <tr>
+            <td>{{ row.timestamp }}</td>
+            <td>{{ row.img1 }}</td>
+            <td>{{ row.img2 }}</td>
+            <td>{{ row.img3 }}</td>
+            <td>{{ row.img4 }}</td>
+            <td>{{ row.img5 }}</td>
+            <td>{{ row.mode }}</td>
+        </tr>
         {% endfor %}
     </table>
-{% endblock %}
+    <table>
+        <tr>
+            <th>Admins</th>
+        </tr>
+        {% for username in admin_usernames %}
+        <tr>
+            <td>{{ username }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
+</div>

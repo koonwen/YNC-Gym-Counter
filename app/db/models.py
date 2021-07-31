@@ -18,21 +18,29 @@ class Admin(db.Model):
     def __str__(self):
         return f'<Admin: {self.username}>'
 
-    @staticmethod
-    def add_admin(username, password):
-        new_admin = Admin(username=username, password=generate_password_hash(password))
+    @classmethod
+    def add_admin(cls, username, password):
+        new_admin = cls(username=username, password=generate_password_hash(password))
         db.session.add(new_admin)
         db.session.commit()
         return new_admin
 
     @classmethod
-    def verify(cls, username, password):
+    def verify_admin(cls, username, password):
+        """verify admins"""
         user = cls.query.filter_by(username=username).first()
         if user is None:
             return
         if check_password_hash(user.password, password):
             return user._id
         return "Incorrect password"
+
+    @classmethod
+    def get_all_admin_usernames(cls):
+        """Return all admin usernames registered in the database"""
+        admins = cls.query.all()
+        admins_username = list(map(lambda admin: admin.username, admins))
+        return admins_username
 
 
 class Data(db.Model):
@@ -57,12 +65,11 @@ class Data(db.Model):
     def __str__(self):
         return f'<Data:{self.timestamp}, {self.mode}>'
 
-    #TODO add validation
-    @staticmethod
-    def add_data(timestamp, img1, img2, img3, img4, img5, mode):
+    @classmethod
+    def add_data(cls, timestamp, img1, img2, img3, img4, img5, mode):
         if not isinstance(timestamp, datetime):
             raise Exception("Not datetime object")
-        new_data = Data(timestamp=timestamp,
+        new_data = cls(timestamp=timestamp,
                         img1=img1,
                         img2=img2,
                         img3=img3,
@@ -73,24 +80,23 @@ class Data(db.Model):
         db.session.commit()
         return new_data
 
-    @staticmethod
-    def get_latest():
-        """Return latest entry in the table"""
-        return Data.query.order_by(Data.timestamp.desc()).first()
+    @classmethod
+    def get_latest_entry(cls):
+        """Return latest entry from the Data table"""
+        return cls.query.order_by(Data.timestamp.desc()).first()
 
     @classmethod
-    def get_latest_mode(cls):
-        """return just the mode of the latest entry, returns None if N/A"""
-        entry = cls.get_latest()
-        return entry.mode
+    def get_latest_n_entries(cls, n=10):
+        """Return latest n entries from Data table"""
+        return cls.query.order_by(cls.timestamp.desc()).limit(n)
 
-    @staticmethod
-    def mock_data(entries=1):
+    @classmethod
+    def mock_data(cls, entries=1):
         """Generate specified number of random data entries """
         for i in range(entries):
             lst = [random.randint(0, 10) for j in range(5)]
             lst.sort()
-            db.session.add(Data(timestamp=datetime.now(),
+            db.session.add(cls(timestamp=datetime.now(),
                                 img1=lst[0],
                                 img2=lst[1],
                                 img3=lst[2],
