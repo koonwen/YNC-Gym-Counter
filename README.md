@@ -65,6 +65,7 @@ You might notice that when you ran the developmental server with a fresh install
 │       └── user.py
 ├── instance
 │   └── site.db
+├── Jenkinsfile
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
@@ -87,6 +88,7 @@ You might notice that when you ran the developmental server with a fresh install
 - **app**: Directory holds all the code related to the website.
 - **instance**: Directory to keep sqlite database files and other instance data (Not shown in the repository but will get created when you first initialize the database)
 The application structure is adapted from the flask documentation.
+- **Jenkinsfile**: A configuration file to tell jenkins how to build and test the project on the remote server  
 - **LICENSE**: The policy for using this repository.
 - **README.md**: Information about the project. Actually what you are reading right now.
 - **requirements.txt**: Text file to instruct python what packages to download
