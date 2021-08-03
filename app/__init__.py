@@ -9,7 +9,7 @@ def create_app(test_config=None):
     app.config['SECRET_KEY']='dev',
     app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../instance/site.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-    app.permanent_session_lifetime = False
+    # app.permanent_session_lifetime = False
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
