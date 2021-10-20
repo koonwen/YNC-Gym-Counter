@@ -35,5 +35,5 @@ def receive_data():
                   data['img3'],
                   data['img4'],
                   data['img5'],
-                  data['mode'])
+                  data['mode']) #TODO change this to 'highest' once Data class has been updated on the RPI
     return "Success"
