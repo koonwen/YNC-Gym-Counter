@@ -3,6 +3,8 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
 
+import app.db
+
 db = SQLAlchemy()
 
 
@@ -51,7 +53,7 @@ class Data(db.Model):
     img3 = db.Column(db.Integer, nullable=False)
     img4 = db.Column(db.Integer, nullable=False)
     img5 = db.Column(db.Integer, nullable=False)
-    mode = db.Column(db.Integer, nullable=False)
+    highest = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'Data(timestamp={self.timestamp}, ' \
@@ -60,13 +62,20 @@ class Data(db.Model):
                f'img3={self.img3}, ' \
                f'img4={self.img4}, ' \
                f'img5={self.img5}, ' \
-               f'mode={self.mode})'
+               f'highest={self.highest})'
 
     def __str__(self):
-        return f'<Data:{self.timestamp}, {self.mode}>'
+        return f'<Data:{self.timestamp}, {self.highest}>'
+
+    # Add Data object to the db
+    @classmethod
+    def add_data_class(cls, new_data):
+        db.session.add(new_data)
+        db.session.commit()
+        return new_data
 
     @classmethod
-    def add_data(cls, timestamp, img1, img2, img3, img4, img5, mode):
+    def add_data(cls, timestamp, img1, img2, img3, img4, img5, highest):
         if not isinstance(timestamp, datetime):
             raise Exception("Not datetime object")
         new_data = cls(timestamp=timestamp,
@@ -75,7 +84,7 @@ class Data(db.Model):
                         img3=img3,
                         img4=img4,
                         img5=img5,
-                        mode=mode)
+                        highest=highest)
         db.session.add(new_data)
         db.session.commit()
         return new_data
@@ -83,15 +92,15 @@ class Data(db.Model):
     @classmethod
     def get_latest_entry(cls):
         """Return latest entry from the Data table"""
-        return cls.query.order_by(Data.timestamp.desc()).first()
+        return cls.query.order_by(cls.timestamp.desc()).first()
 
     @classmethod
-    def get_latest_n_entries(cls, n=10):
-        """Return latest n entries from Data table"""
-        return cls.query.order_by(cls.timestamp.desc()).limit(n)
+    def get_latest_n_entries(cls, n=10) -> list:
+        """Return list of latest n entries from Data table"""
+        return cls.query.order_by(cls.timestamp.desc()).limit(n).all()
 
     @classmethod
-    def mock_data(cls, entries=1):
+    def mock_data(cls, entries=1) -> None:
         """Generate specified number of random data entries """
         for i in range(entries):
             lst = [random.randint(0, 10) for j in range(5)]
@@ -102,5 +111,5 @@ class Data(db.Model):
                                 img3=lst[2],
                                 img4=lst[3],
                                 img5=lst[4],
-                                mode=lst[2]))
+                                highest=max(lst)))
         return
