@@ -36,7 +36,7 @@ For all other questions and queries, please email: koonwen@gmail.com
 
 ## Testing
 You might notice that when you ran the developmental server with a fresh install of the application, the site shows "No data yet". This is expected because the actual data is kept on the server. However, you can mock some data by exiting the program and running `flask mock-db`. Rerun the developmental server and you should see that some data has been added.
-- There are also unit tests for most of the components in the application. To run all the tests, on the command line, issue `pytest -v`. 
+- There are also unit tests for most of the components in the application. To run all the tests, on the command line, issue `python3 pytest -v`. 
 - To view all the test coverage over the application, run `coverage run -m pytest`. Look for the "htmlcov" that should have been generated. Inside the directory, open the "index.html" file in your browser.
 
 ## Application Structure        
