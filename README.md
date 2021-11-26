@@ -1,5 +1,5 @@
 # YNC-Gym-Counter
-The server code for the yncgym.ml website
+The server code for the yncgym.rocks website
 
 ## Contents
 - Building the project
